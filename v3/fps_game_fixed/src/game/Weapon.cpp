@@ -1,7 +1,6 @@
 #include "Weapon.h"
 #include <iostream>
 #include <algorithm>
-#include <glm/gtc/matrix_transform.hpp>
 
 namespace Game {
 

@@ -1,8 +1,5 @@
 #include "Renderer.h"
-#ifndef GL_GLEXT_PROTOTYPES
-#define GL_GLEXT_PROTOTYPES
-#endif
-#include <SDL_opengl.h>
+#include <glad/glad.h>
 
 namespace Engine {
 
@@ -59,7 +56,7 @@ void main() {
     float specularStrength = 0.5;
     vec3 viewDir = normalize(viewPos - FragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32.0);
     vec3 specular = specularStrength * spec * vec3(1.0);
 
     vec3 result = (ambient + diffuse + specular) * objectColor * Color;
@@ -67,7 +64,7 @@ void main() {
 }
 )";
 
-Renderer::Renderer() 
+Renderer::Renderer()
     : m_camera(nullptr)
     , m_viewportWidth(800)
     , m_viewportHeight(600)
@@ -85,7 +82,8 @@ bool Renderer::init() {
 }
 
 void Renderer::clear(const glm::vec3& color) {
-    glClearColor(color.r, color.g, color.b, 1.0f);
+    // FIX: use .x/.y/.z — the custom GLM stub has no .r/.g/.b aliases
+    glClearColor(color.x, color.y, color.z, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -94,14 +92,12 @@ void Renderer::renderMesh(Mesh& mesh, const glm::mat4& model, const glm::vec3& c
 
     m_shader.use();
 
-    // Set matrices
     m_shader.setMat4("model", model);
     m_shader.setMat4("view", m_camera->getViewMatrix());
-    
+
     float aspect = (float)m_viewportWidth / (float)m_viewportHeight;
     m_shader.setMat4("projection", m_camera->getProjectionMatrix(aspect));
 
-    // Set lighting
     m_shader.setVec3("objectColor", color);
     m_shader.setVec3("lightPos", glm::vec3(5.0f, 10.0f, 5.0f));
     m_shader.setVec3("viewPos", m_camera->getPosition());

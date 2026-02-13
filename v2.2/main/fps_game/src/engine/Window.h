@@ -2,7 +2,10 @@
 #define WINDOW_H
 
 #include <SDL2/SDL.h>
-#include <GL/gl.h>
+#ifndef GL_GLEXT_PROTOTYPES
+#define GL_GLEXT_PROTOTYPES
+#endif
+#include <SDL_opengl.h>
 #include <string>
 #include <functional>
 

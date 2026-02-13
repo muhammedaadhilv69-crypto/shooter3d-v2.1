@@ -2,7 +2,6 @@
 #define PARTICLE_H
 
 #include "../engine/Mesh.h"
-#include "../engine/Renderer.h"
 #include <glm/glm.hpp>
 #include <vector>
 

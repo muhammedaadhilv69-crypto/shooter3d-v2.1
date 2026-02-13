@@ -1,0 +1,68 @@
+FPS Game - Project Structure
+============================
+
+fps_game/
+├── CMakeLists.txt                 # Main build configuration
+├── README.md                      # Project documentation
+├── BUILD_GUIDE.md                 # Detailed build instructions
+├── build.sh                       # Linux/macOS build script
+├── build_windows.bat              # Windows build script  
+├── install_deps.sh                # Dependency installation helper
+├── setup_glm.sh                   # GLM library setup
+│
+├── src/
+│   ├── main.cpp                   # Entry point
+│   │
+│   ├── engine/                    # Core engine modules
+│   │   ├── Window.h/cpp          # Window management (SDL2)
+│   │   ├── Renderer.h/cpp        # OpenGL rendering system
+│   │   ├── Shader.h/cpp          # Shader compilation & management
+│   │   ├── Camera.h/cpp          # FPS camera controller
+│   │   ├── Mesh.h/cpp            # 3D mesh primitives
+│   │   └── Texture.h/cpp         # Texture loading
+│   │
+│   └── game/                      # Game-specific code
+│       ├── Game.h/cpp            # Main game loop & state
+│       ├── Player.h/cpp          # Player controller
+│       ├── Weapon.h/cpp          # Weapon system
+│       ├── Enemy.h/cpp           # Enemy AI
+│       ├── Level.h/cpp           # Procedural level generation
+│       └── Particle.h/cpp        # Particle effects system
+│
+├── external/                      # Third-party libraries
+│   └── glm/                      # GLM math library (header-only)
+│       └── glm/
+│           ├── glm.hpp
+│           └── gtc/
+│               ├── matrix_transform.hpp
+│               └── type_ptr.hpp
+│
+└── resources/                     # Game resources (procedurally generated)
+    ├── shaders/                  # (Built into code)
+    └── textures/                 # (Procedurally generated)
+
+Key Features:
+------------
+- Modular C++17 architecture
+- OpenGL 3.3 Core Profile rendering
+- SDL2 for windowing and input
+- GLM for mathematics
+- No external asset dependencies
+- Production-grade code structure
+- Cross-platform support (Linux, Windows, macOS)
+
+Build System:
+------------
+- CMake 3.10+ for cross-platform builds
+- Separate engine and game libraries
+- Optimized release builds
+- Debug build support
+
+Technical Stack:
+--------------
+- Language: C++17
+- Graphics: OpenGL 3.3+
+- Window/Input: SDL2
+- Math: GLM (embedded)
+- Build: CMake
+- Platforms: Linux, Windows, macOS

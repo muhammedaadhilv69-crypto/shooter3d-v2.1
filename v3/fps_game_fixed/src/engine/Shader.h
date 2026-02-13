@@ -1,10 +1,7 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#ifndef GL_GLEXT_PROTOTYPES
-#define GL_GLEXT_PROTOTYPES
-#endif
-#include <SDL_opengl.h>
+#include <glad/glad.h>
 #include <string>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

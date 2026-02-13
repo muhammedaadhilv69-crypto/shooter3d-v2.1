@@ -1,3 +1,11 @@
+#!/bin/bash
+# GLM is header-only, we'll create minimal required headers
+
+mkdir -p external/glm/glm/gtc
+mkdir -p external/glm/glm/gtx
+
+# Create main glm.hpp
+cat > external/glm/glm/glm.hpp << 'GLMEOF'
 // Minimal GLM header for FPS game
 #ifndef GLM_GLM_HPP
 #define GLM_GLM_HPP
@@ -17,19 +25,11 @@ namespace glm {
     
     template<typename T>
     struct tvec3 {
-        union {
-            struct { T x, y, z; };
-            struct { T r, g, b; };
-            T data[3];
-        };
-
+        T x, y, z;
         tvec3() : x(0), y(0), z(0) {}
         tvec3(T s) : x(s), y(s), z(s) {}
-        tvec3(T x_, T y_, T z_) : x(x_), y(y_), z(z_) {}
-
-        T& operator[](int i) { return data[i]; }
-        const T& operator[](int i) const { return data[i]; }
-
+        tvec3(T x, T y, T z) : x(x), y(y), z(z) {}
+        
         tvec3 operator+(const tvec3& v) const { return tvec3(x+v.x, y+v.y, z+v.z); }
         tvec3 operator-(const tvec3& v) const { return tvec3(x-v.x, y-v.y, z-v.z); }
         tvec3 operator*(T s) const { return tvec3(x*s, y*s, z*s); }
@@ -39,36 +39,15 @@ namespace glm {
         tvec3& operator*=(T s) { x*=s; y*=s; z*=s; return *this; }
         tvec3 operator-() const { return tvec3(-x, -y, -z); }
     };
-
-    template<typename T>
-    tvec3<T> operator*(T s, const tvec3<T>& v) { return v * s; }
-
+    
     template<typename T>
     struct tvec4 {
-        union {
-            struct { T x, y, z, w; };
-            struct { T r, g, b, a; };
-            T data[4];
-        };
-
+        T x, y, z, w;
         tvec4() : x(0), y(0), z(0), w(0) {}
         tvec4(T s) : x(s), y(s), z(s), w(s) {}
-        tvec4(T x_, T y_, T z_, T w_) : x(x_), y(y_), z(z_), w(w_) {}
-        tvec4(const tvec3<T>& v, T w_) : x(v.x), y(v.y), z(v.z), w(w_) {}
-
-        T& operator[](int i) { return data[i]; }
-        const T& operator[](int i) const { return data[i]; }
-
-        tvec4 operator+(const tvec4& v) const { return tvec4(x+v.x, y+v.y, z+v.z, w+v.w); }
-        tvec4 operator-(const tvec4& v) const { return tvec4(x-v.x, y-v.y, z-v.z, w-v.w); }
-        tvec4 operator*(T s) const { return tvec4(x*s, y*s, z*s, w*s); }
-        tvec4& operator+=(const tvec4& v) { x+=v.x; y+=v.y; z+=v.z; w+=v.w; return *this; }
-        tvec4& operator-=(const tvec4& v) { x-=v.x; y-=v.y; z-=v.z; w-=v.w; return *this; }
-        tvec4& operator*=(T s) { x*=s; y*=s; z*=s; w*=s; return *this; }
+        tvec4(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {}
+        tvec4(const tvec3<T>& v, T w) : x(v.x), y(v.y), z(v.z), w(w) {}
     };
-
-    template<typename T>
-    tvec4<T> operator*(T s, const tvec4<T>& v) { return v * s; }
     
     // Matrix type (column-major)
     template<typename T>
@@ -132,3 +111,6 @@ namespace glm {
 }
 
 #endif
+GLMEOF
+
+echo "GLM headers created successfully"

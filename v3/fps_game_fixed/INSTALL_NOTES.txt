@@ -1,0 +1,29 @@
+IMPORTANT INSTALLATION NOTES
+=============================
+
+After extracting this zip file:
+
+1. LINUX/MAC USERS:
+   Make scripts executable:
+   chmod +x *.sh
+   
+   Then run:
+   ./download_sdl2.sh
+   ./build_portable.sh
+
+2. WINDOWS USERS:
+   Simply double-click:
+   download_sdl2_windows.bat
+   build_portable_windows.bat
+
+3. FILE PERMISSIONS:
+   If you get "permission denied" errors on Linux/Mac,
+   run: chmod +x *.sh
+   
+4. START HERE:
+   Read START_HERE.md or WHATS_NEW.txt for quick start
+
+5. PORTABLE BUILD:
+   See PORTABLE_BUILD_GUIDE.md for detailed instructions
+
+Enjoy the game!
