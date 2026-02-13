@@ -1,0 +1,52 @@
+name: Build
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake libgl1-mesa-dev xorg-dev
+    
+    - name: Build
+      run: bash scripts/build_linux.sh
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: fps-shooter-linux
+        path: build/linux/FPSShooter
+
+  build-windows:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+    
+    - name: Install MinGW
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mingw-w64
+    
+    - name: Build
+      run: bash scripts/build_windows.sh
+    
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: fps-shooter-windows
+        path: build/windows/FPSShooter.exe
