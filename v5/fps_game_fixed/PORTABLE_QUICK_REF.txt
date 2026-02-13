@@ -1,0 +1,94 @@
+╔══════════════════════════════════════════════════════════════╗
+║         FPS Game - Portable Build Quick Reference           ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│ WHAT IS PORTABLE MODE?                                       │
+└──────────────────────────────────────────────────────────────┘
+
+  ✓ SDL2.dll/libSDL2.so INCLUDED in bin/ folder
+  ✓ NO installation needed on target machine
+  ✓ Just copy bin/ folder and run anywhere
+  ✓ OpenGL only system requirement (already present)
+
+┌──────────────────────────────────────────────────────────────┐
+│ WINDOWS - ONE-TIME SETUP (MSYS2)                            │
+└──────────────────────────────────────────────────────────────┘
+
+  1. Install MSYS2 from https://www.msys2.org/
+  2. Open "MSYS2 MinGW 64-bit" terminal
+  3. Run: pacman -S mingw-w64-x86_64-cmake 
+              mingw-w64-x86_64-gcc make tar
+
+┌──────────────────────────────────────────────────────────────┐
+│ BUILD COMMANDS                                               │
+└──────────────────────────────────────────────────────────────┘
+
+Windows (MSYS2):
+  download_sdl2_windows.bat    ← Download SDL2 source (once)
+  build_portable_windows.bat   ← Build everything
+  
+Linux/macOS:
+  ./download_sdl2.sh           ← Download SDL2 source (once)
+  ./build_portable.sh          ← Build everything
+
+GitHub Codespaces (Windows .exe):
+  ./download_sdl2.sh
+  mkdir build-windows && cd build-windows
+  x86_64-w64-mingw32-cmake .. -DCMAKE_BUILD_TYPE=Release
+  make -j$(nproc)
+
+┌──────────────────────────────────────────────────────────────┐
+│ RESULT                                                       │
+└──────────────────────────────────────────────────────────────┘
+
+build-portable/bin/
+  ├── FPSGame.exe      (Windows)  or  FPSGame (Linux/Mac)
+  └── SDL2.dll         (Windows)  or  libSDL2.so (Linux)
+
+SIZE: ~2-3 MB total
+
+┌──────────────────────────────────────────────────────────────┐
+│ DISTRIBUTION                                                 │
+└──────────────────────────────────────────────────────────────┘
+
+  1. Zip the build-portable/bin/ folder
+  2. Share the .zip file
+  3. Recipients: Extract & run - NO INSTALLATION!
+
+┌──────────────────────────────────────────────────────────────┐
+│ BUILD TIMES                                                  │
+└──────────────────────────────────────────────────────────────┘
+
+  First build:  5-10 min  (compiles SDL2 from source)
+  Rebuilds:     10-30 sec (SDL2 already built)
+
+┌──────────────────────────────────────────────────────────────┐
+│ TROUBLESHOOTING                                              │
+└──────────────────────────────────────────────────────────────┘
+
+  Q: "SDL2 source not found"
+  A: Run ./download_sdl2.sh or download_sdl2_windows.bat
+
+  Q: "Can't find compiler"  
+  A: Windows: Install MSYS2 + MinGW
+     Linux: sudo apt-get install build-essential
+
+  Q: "SDL2.dll missing"
+  A: It auto-copies. Check build-portable/bin/
+
+  Q: "Won't run on another PC"
+  A: Target needs OpenGL 3.3+ (update GPU drivers)
+
+┌──────────────────────────────────────────────────────────────┐
+│ PORTABILITY TEST                                             │
+└──────────────────────────────────────────────────────────────┘
+
+  1. Copy build-portable/bin/ to USB drive
+  2. Plug into another computer
+  3. Run FPSGame.exe (no admin needed!)
+  4. It just works! ✓
+
+╔══════════════════════════════════════════════════════════════╗
+║ For detailed guide: PORTABLE_BUILD_GUIDE.md                 ║
+╚══════════════════════════════════════════════════════════════╝
