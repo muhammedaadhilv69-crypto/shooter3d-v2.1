@@ -39,7 +39,7 @@ PFNGLGENERATEMIPMAPPROC          glad_glGenerateMipmap          = NULL;
 PFNGLBLENDEQUATIONPROC           glad_glBlendEquation           = NULL;
 PFNGLBLENDFUNCSEPARATEPROC       glad_glBlendFuncSeparate       = NULL;
 
-#define LOAD(name) glad_##name = (PFN##name##PROC) SDL_GL_GetProcAddress(#name); \
+#define LOAD(name) glad_##name = (void*) SDL_GL_GetProcAddress(#name); \
     if (!glad_##name) { fprintf(stderr, "WARNING: Could not load " #name "\n"); }
 
 int gladLoadGL(void) {
