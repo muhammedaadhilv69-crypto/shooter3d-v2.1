@@ -67,7 +67,7 @@ set(GLAD_SOURCES
 )
 
 # ---- Executable ----
-add_executable(FPSGame
+add_executable(FPSGame WIN32
     src/main.cpp
     ${ENGINE_SOURCES}
     ${GAME_SOURCES}
@@ -76,6 +76,7 @@ add_executable(FPSGame
 
 # ---- Link libraries ----
 target_link_libraries(FPSGame
+    SDL2main
     SDL2
     ${OPENGL_LIBRARIES}
 )
